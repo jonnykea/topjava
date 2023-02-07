@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface Storage {
 
+    int size();
+
     void clear();
 
     void save(Meal m);
@@ -15,7 +17,6 @@ public interface Storage {
     Meal get(String uuid);
 
     void delete(String uuid);
-
 
     List<Meal> getAllSorted();
 

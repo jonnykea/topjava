@@ -4,15 +4,18 @@ import ru.javawebinar.topjava.TestData;
 import ru.javawebinar.topjava.model.Meal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class ListMeals implements Storage {
     private static final Logger LOG = Logger.getLogger(ListMeals.class.getName());
+
     private final List<Meal> listMeals = TestData.meals;
 
-    public ListMeals() {
-        new ArrayList<>(listMeals);
+    @Override
+    public int size() {
+        return listMeals.size();
     }
 
     @Override
@@ -29,7 +32,7 @@ public class ListMeals implements Storage {
     public void update(Meal m) {
         LOG.info("save " + m);
         int searchKey = getSearchKey(m.getUuid());
-        if (searchKey == 0) {
+        if (searchKey == -1) {
             save(m);
             return;
         }
@@ -38,6 +41,7 @@ public class ListMeals implements Storage {
 
     @Override
     public Meal get(String uuid) {
+        LOG.info("get Meal with " + uuid);
         int searchKey = getSearchKey(uuid);
         return listMeals.get(searchKey);
     }
@@ -47,13 +51,12 @@ public class ListMeals implements Storage {
         LOG.info("delete" + uuid);
         int searchKey = getSearchKey(uuid);
         listMeals.remove(searchKey);
-
     }
 
     @Override
     public List<Meal> getAllSorted() {
         LOG.info("getAllSorted");
-               /* List<Meal> list = new ArrayList<>(listMeals);
+/*                List<Meal> list = new ArrayList<>(listMeals);
         Collections.sort(list);*/
         return new ArrayList<>(listMeals);
     }
@@ -64,6 +67,6 @@ public class ListMeals implements Storage {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 }

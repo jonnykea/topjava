@@ -7,9 +7,8 @@
     <title>Meals</title>
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
-<hr>
 <section>
+    <a href="meals?uuid=${mealTo.uuid}&action=add"> Create new Meal <img src="img/add.png"></a>
     <br>
     <table border="1" cellpadding="8" cellspacing="0" style="margin: auto">
         <tr>
@@ -25,9 +24,9 @@
                 <td align="center">${mealTo.dateTime}</td>
                 <td align="center">${mealTo.description}</td>
                 <td align="center">${mealTo.calories}</td>
-                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=update"><img src="../../img/pencil.png" ></a>
+                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=update"><img src="img/pencil.png"></a>
                 </td>
-                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=delete"><img src="../../img/delete.png"></a>
+                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=delete"><img src="img/delete.png"></a>
                 </td>
             </tr>
         </c:forEach>

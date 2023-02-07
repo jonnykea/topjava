@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -21,11 +22,11 @@
         </dl>
         <dl>
             <dt>Description:</dt>
-            <dd><input type="text" name="description" size=50 value="${meal.description}"></dd>
+            <dd><input type="text" name="description" size=50 required="required" value="${meal.description}"></dd>
         </dl>
         <dl>
             <dt>Calories:</dt>
-            <dd><input type="number" name="calories" size=50 value="${meal.calories}"></dd>
+            <dd><input type="number" name="calories" size=50 required="required" value="${meal.calories}"></dd>
         </dl>
         <button type="submit">Сохранить</button>
         <button onclick="window.history.back()">Отменить</button>

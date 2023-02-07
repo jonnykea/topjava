@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -31,20 +30,16 @@ public class MealServlet extends HttpServlet {
         LocalDateTime dateTime = LocalDateTime.parse(req.getParameter("dateTime"));
         String description = req.getParameter("description");
         int calories = Integer.parseInt(req.getParameter("calories"));
-        final boolean isCreate = (uuid == null || uuid.length() == 0);
         Meal m;
-        if (isCreate) {
-            m = new Meal(UUID.randomUUID().toString(), dateTime, description, calories);
-        } else {
-            m = new Meal(uuid, dateTime, description, calories);
-            storage.update(m);
-        }
+        m = new Meal(uuid, dateTime, description, calories);
+        storage.update(m);
+
+        log.debug("redirect to meals");
         resp.sendRedirect("meals");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        log.debug("redirect to meals");
 
         String uuid = request.getParameter("uuid");
         String action = request.getParameter("action");
@@ -57,23 +52,28 @@ public class MealServlet extends HttpServlet {
         }
         Meal m;
         switch (action) {
-            case "delete" -> {
+            case "delete":
                 storage.delete(uuid);
-                response.sendRedirect("listMeals");
+                response.sendRedirect("meals");
                 return;
-            }
-/*
-            case "add" -> m = Resume.EMPTY;
-            case "update" ->
+            case "add":
+                m = Meal.EMPTY;
+                delegate(request, response, m);
+                return;
+            case "update":
                 m = storage.get(uuid);
-
-*/
-
-            default -> throw new IllegalArgumentException("Action " + action + " is illegal");
+                delegate(request, response, m);
+                return;
+            default:
+                throw new IllegalArgumentException("Action " + action + " is illegal");
         }
-//        request.setAttribute("meal", m);
-/*        request.getRequestDispatcher(
+    }
+
+    private void delegate(HttpServletRequest request, HttpServletResponse response, Meal m) throws ServletException, IOException {
+        log.debug("Dispatcher");
+        request.setAttribute("meal", m);
+        request.getRequestDispatcher(
                 "/WEB-INF/jsp/edit.jsp"
-        ).forward(request, response);*/
+        ).forward(request, response);
     }
 }

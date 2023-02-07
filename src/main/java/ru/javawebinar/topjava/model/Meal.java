@@ -1,7 +1,9 @@
 package ru.javawebinar.topjava.model;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Meal {
     private final String uuid;
@@ -11,6 +13,8 @@ public class Meal {
     private final String description;
 
     private final int calories;
+
+    public static Meal EMPTY = new Meal(UUID.randomUUID().toString(),LocalDateTime.of(2020, Month.JANUARY, 1, 0, 0),"",0);
 
     public Meal(String uuid, LocalDateTime dateTime, String description, int calories) {
         this.uuid = uuid;
