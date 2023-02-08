@@ -11,7 +11,7 @@
 <hr>
 <section>
     <form method="post" action="meals" enctype="application/x-www-form-urlencoded">
-        <input type="hidden" name="uuid" value="${meal.uuid}">
+        <input type="hidden" name="uuid" value="${meal.id}">
         <h3>Edit meal:</h3>
         <dl>
             <dt>DateTime:</dt>

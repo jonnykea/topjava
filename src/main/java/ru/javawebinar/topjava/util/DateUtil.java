@@ -5,10 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MMMM/dddd");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-    public static LocalDate parse(String date) {
-        LocalDate localDate = LocalDate.parse(date, DATE_FORMATTER);
-        return LocalDate.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth());
+    public static String parse(LocalDate dateTime) {
+        return dateTime.format(DATE_FORMATTER);
     }
 }

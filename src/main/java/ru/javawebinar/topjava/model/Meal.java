@@ -1,12 +1,11 @@
 package ru.javawebinar.topjava.model;
 
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.Objects;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Meal {
-    private final String uuid;
+    private final AtomicInteger id;
 
     private final LocalDateTime dateTime;
 
@@ -14,17 +13,15 @@ public class Meal {
 
     private final int calories;
 
-    public static Meal EMPTY = new Meal(UUID.randomUUID().toString(),LocalDateTime.of(2020, Month.JANUARY, 1, 0, 0),"",0);
-
-    public Meal(String uuid, LocalDateTime dateTime, String description, int calories) {
-        this.uuid = uuid;
+    public Meal(AtomicInteger id, LocalDateTime dateTime, String description, int calories) {
+        this.id = id;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
     }
 
-    public String getUuid() {
-        return uuid;
+    public AtomicInteger getId() {
+        return id;
     }
 
     public LocalDateTime getDateTime() {
@@ -47,14 +44,14 @@ public class Meal {
         Meal meal = (Meal) o;
 
         if (calories != meal.calories) return false;
-        if (!Objects.equals(uuid, meal.uuid)) return false;
+        if (!Objects.equals(id, meal.id)) return false;
         if (!Objects.equals(dateTime, meal.dateTime)) return false;
         return Objects.equals(description, meal.description);
     }
 
     @Override
     public int hashCode() {
-        int result = uuid != null ? uuid.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + calories;
@@ -70,8 +67,5 @@ public class Meal {
                 '}';
     }
 
-    public int compareTo(Meal m) {
-        int result = dateTime.compareTo(m.dateTime);
-        return result != 0 ? result : uuid.compareTo(m.uuid);
-    }
+
 }

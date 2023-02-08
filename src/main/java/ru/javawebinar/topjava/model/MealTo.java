@@ -3,10 +3,12 @@ package ru.javawebinar.topjava.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MealTo {
+    private final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
 
-    private final String uuid;
+    private final AtomicInteger id;
 
     private final LocalDateTime dateTime;
 
@@ -16,8 +18,8 @@ public class MealTo {
 
     private final boolean excess;
 
-    public MealTo(String uuid, LocalDateTime dateTime, String description, int calories, boolean excess) {
-        this.uuid = uuid;
+    public MealTo(AtomicInteger id, LocalDateTime dateTime, String description, int calories, boolean excess) {
+        this.id = id;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
@@ -43,14 +45,14 @@ public class MealTo {
 
         if (calories != mealTo.calories) return false;
         if (excess != mealTo.excess) return false;
-        if (!Objects.equals(uuid, mealTo.uuid)) return false;
+        if (!Objects.equals(id, mealTo.id)) return false;
         if (!Objects.equals(dateTime, mealTo.dateTime)) return false;
         return Objects.equals(description, mealTo.description);
     }
 
     @Override
     public int hashCode() {
-        int result = uuid != null ? uuid.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + calories;
@@ -58,18 +60,18 @@ public class MealTo {
         return result;
     }
 
-    public int compareTo(MealTo m) {
-        int result = dateTime.compareTo(m.dateTime);
-        return result != 0 ? result : uuid.compareTo(m.uuid);
+
+
+    public AtomicInteger getId() {
+        return id;
     }
 
-    public String getUuid() {
-        return uuid;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public String getDateTime() {
-        DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH:mm");
-        return dateTime.format(DATE_FORMATTER);
+    public DateTimeFormatter getDATE_FORMATTER() {
+        return DATE_FORMATTER;
     }
 
     public String getDescription() {

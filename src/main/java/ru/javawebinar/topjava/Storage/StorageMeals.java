@@ -3,20 +3,19 @@ package ru.javawebinar.topjava.Storage;
 import ru.javawebinar.topjava.model.Meal;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public interface Storage {
+public interface StorageMeals {
 
-    int size();
-
-    void clear();
+    AtomicInteger size();
 
     void save(Meal m);
 
     void update(Meal m);
 
-    Meal get(String uuid);
+    Meal get(AtomicInteger id);
 
-    void delete(String uuid);
+    void delete(AtomicInteger id);
 
     List<Meal> getAllSorted();
 

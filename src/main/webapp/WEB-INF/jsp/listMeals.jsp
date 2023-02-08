@@ -8,7 +8,7 @@
 </head>
 <body>
 <section>
-    <a href="meals?uuid=${mealTo.uuid}&action=add"> Create new Meal <img src="img/add.png"></a>
+    <a href="meals?id=${mealTo.id}&action=add"> Create new Meal <img src="img/add.png"></a>
     <br>
     <table border="1" cellpadding="8" cellspacing="0" style="margin: auto">
         <tr>
@@ -21,12 +21,12 @@
         <c:forEach items="${mealsTo}" var="mealTo">
             <jsp:useBean id="mealTo" type="ru.javawebinar.topjava.model.MealTo"/>
             <tr style="color: ${mealTo.excess ? 'red' : 'green' }">
-                <td align="center">${mealTo.dateTime}</td>
+                <td align="center">${mealTo.dateTime.format(mealTo.DATE_FORMATTER)}</td>
                 <td align="center">${mealTo.description}</td>
                 <td align="center">${mealTo.calories}</td>
-                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=update"><img src="img/pencil.png"></a>
+                <td align="center"><a href="meals?id=${mealTo.id}&action=update"><img src="img/pencil.png"></a>
                 </td>
-                <td align="center"><a href="meals?uuid=${mealTo.uuid}&action=delete"><img src="img/delete.png"></a>
+                <td align="center"><a href="meals?id=${mealTo.id}&action=delete"><img src="img/delete.png"></a>
                 </td>
             </tr>
         </c:forEach>
