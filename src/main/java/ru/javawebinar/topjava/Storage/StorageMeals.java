@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public interface StorageMeals {
-
-    AtomicInteger size();
+    int getCount();
 
     void save(Meal m);
 
     void update(Meal m);
 
-    Meal get(AtomicInteger id);
+    Meal get(int id);
 
-    void delete(AtomicInteger id);
+    void delete(int id);
 
-    List<Meal> getAllSorted();
+    List<Meal> getAll();
 
 }

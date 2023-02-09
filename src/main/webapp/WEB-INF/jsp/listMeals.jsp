@@ -7,6 +7,8 @@
     <title>Meals</title>
 </head>
 <body>
+<h3><a href="index.html">Home</a></h3>
+<hr>
 <section>
     <a href="meals?id=${mealTo.id}&action=add"> Create new Meal <img src="img/add.png"></a>
     <br>

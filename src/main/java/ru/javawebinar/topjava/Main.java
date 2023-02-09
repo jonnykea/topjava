@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava;
 
-import ru.javawebinar.topjava.Storage.ListMeals;
+import ru.javawebinar.topjava.Storage.StorageListForMeals;
 import ru.javawebinar.topjava.Storage.StorageMeals;
 import ru.javawebinar.topjava.model.Meal;
 
@@ -15,9 +15,9 @@ public class Main {
         System.out.format("Hello TopJava Enterprise!" + "\n");
         System.out.println();
 
-        StorageMeals storageMeals = new ListMeals();
-        Meal meal = new Meal(storageMeals.size(), LocalDateTime.now(), "Завтрак", 500);
+        StorageMeals storageMeals = new StorageListForMeals();
+        Meal meal = new Meal(storageMeals.getCount(), LocalDateTime.now(), "Завтрак", 500);
         storageMeals.update(meal);
-        System.out.println(storageMeals.size());
+        System.out.println(storageMeals.getCount());
     }
 }

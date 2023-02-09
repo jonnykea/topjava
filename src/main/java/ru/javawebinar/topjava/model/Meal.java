@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Meal {
-    private final AtomicInteger id;
+    private int id;
 
     private final LocalDateTime dateTime;
 
@@ -13,14 +13,14 @@ public class Meal {
 
     private final int calories;
 
-    public Meal(AtomicInteger id, LocalDateTime dateTime, String description, int calories) {
+    public Meal(int id, LocalDateTime dateTime, String description, int calories) {
         this.id = id;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
     }
 
-    public AtomicInteger getId() {
+    public int getId() {
         return id;
     }
 
@@ -36,26 +36,8 @@ public class Meal {
         return calories;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Meal meal = (Meal) o;
-
-        if (calories != meal.calories) return false;
-        if (!Objects.equals(id, meal.id)) return false;
-        if (!Objects.equals(dateTime, meal.dateTime)) return false;
-        return Objects.equals(description, meal.description);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + calories;
-        return result;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -66,6 +48,4 @@ public class Meal {
                 ", calories=" + calories +
                 '}';
     }
-
-
 }
